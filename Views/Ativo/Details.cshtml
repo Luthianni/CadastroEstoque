@@ -1,0 +1,57 @@
+﻿@model CadastroEstoque.DTOs.AtivoDTO
+
+
+<br />
+<h4>Dados Gerais</h4>
+<div class="shadow">
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-sm-2">
+                <div class="col-sm-2">
+                    <label class="form-label">Categoria</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="@Model.Categoria.CategoriaNome" placeholder="Categoria" aria-label="Categoria" readonly />
+                    <span asp-validation-for="@Model.Categoria.CategoriaNome" class="text-danger"></span>
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-label">Setor</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="Setor" placeholder="Setor" aria-label="Setor" readonly />
+                    <span asp-validation-for="Setor" class="text-danger"></span>
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-label">Plaqueta</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="Plaqueta" placeholder="Plaqueta" aria-label="Plaqueta" readonly />
+                    <span asp-validation-for="Plaqueta" class="text-danger"></span>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label">Responsavel</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="Responsavel" placeholder="Responsavel" aria-label="Responsavel" readonly />
+                    <span asp-validation-for="Responsavel" class="text-danger"></span>
+                </div>
+                <div class="row g-sm-4">
+                    <div class="col-sm-4">
+                        <label class="form-label">Data de compra</label>
+                        <input class="form-control form-control-sm" type="text" asp-for="DataCompra" placeholder="DataCompra" aria-label="DataCompra" readonly />
+                        <span asp-validation-for="DataCompra" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="form-label">Valor da Compra</label>
+                        <input class="form-control form-control-sm" type="text" asp-for="ValorProduto" placeholder="ValorProduto" aria-label="ValorProduto" readonly />
+                        <span asp-validation-for="ValorProduto" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="form-label">Valor Depreciado</label>
+                        <input class="form-control form-control-sm" type="text" asp-for="Depreciacao" placeholder="Valor Depreciado" aria-label="Depreciacao" readonly />
+                        <span asp-validation-for="Depreciacao" class="text-danger"></span>
+                    </div>
+                    <div class="col-xs-4 col-md-12 form-group">
+                        <div class="controls">
+                            <textarea class="form-control" asp-for="Descricao" placeholder="Descricao" rows="5" readonly></textarea>
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

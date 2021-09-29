@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CadastroEstoque.DTOs.AtivoDTO>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Categorias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Setor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsavel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plaqueta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorProduto)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-ativo="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categorias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Setor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsavel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Plaqueta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+
+                <td>
+                    <div class="btn-group">
+
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+
+
+                        <button cursor="pointer" class="btn btn-primary btnDeleteId" type="button" data-ativo="@item.Id">Apagar</button>
+
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $('.btnDeleteId').on('click', function () {
+
+        var remover = $(this).data('ativo');        
+
+
+        swal({
+            title: "Deseja realmente excluir?",
+            text: "Após deletar não tem como recuperar o arquivo!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '/ativo/Deletar',
+                        data: { id: remover }
+                    }).then(function (response) {
+                        if (response.success) {
+                            $(`tr[data-ativo="${remover}"]`).remove();
+
+                            swal({
+                                title: "Removido com sucesso!",
+                                text: "Clique no botão para sair!",
+                                icon: "success",
+                                button: "Sair!",
+                            });
+                        }
+                    });
+                }
+            });
+
+    });
+
+</script>

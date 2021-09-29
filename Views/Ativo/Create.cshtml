@@ -1,0 +1,115 @@
+﻿@model CadastroEstoque.DTOs.AtivoDTO
+
+<br />
+<h4>Novo Ativo</h4>
+<div class="card shadow">
+    <div class="card-body">
+        <div class="row g-sm-2">
+            <form asp-action="Create" id="formCadastroAtivo" data-toggle="Validator">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <select name="CategoriaId" class="form-select form-select-sm"  aria-label=".form-select-sm example">
+                    <option value="">Escolha uma Categoria</option>
+                    @foreach (var item in Model.Categorias)
+                    {
+                        <option value="@item.Id">@item.CategoriaNome</option>
+                    }
+                </select>
+                <div id="DivSetor" class="invalid-feedback"></div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-sm-2">
+                            <div class="col-sm-6">
+                                <label class="form-label">Setor</label>
+                                <input class="form-control form-control-sm" id="Setor" type="text" name="Setor"  aria-label="Setor" required />
+                                <div id="DivSetor" class="invalid-feedback">                                  
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="form-label">Responsavel</label>
+                                <input class="form-control form-control-sm" id="Responsavel" type="text" name="Responsavel"  aria-label="Responsavel" required />
+                                <div id="DivResponsavel" class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="form-label">Plaqueta</label>
+                                <input class="form-control form-control-sm" id="Plaqueta" type="text" name="Plaqueta"  aria-label="Plaqueta" required />
+                                <div id="DivPlaqueta" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-sm-4">
+                                <div class="col-sm-4">
+                                    <label class="form-label">Data de compra</label>
+                                    <input type="date" class="form-control form-control-sm" id="DataCompra" name="DataCompra"  aria-label="DataCompra" required />
+                                    <div id="DivDataCompra" class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label">Valor da Compra</label>
+                                    <input class="form-control form-control-sm" id="ValorProduto" type="text" name="ValorProduto"  aria-label="ValorProduto" required />
+                                    <div id="DivValorProduto" class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-xs-4 col-md-12 form-group">
+                                    <div class="controls">
+                                        <textarea class="form-control" id="Descricao" name="Descricao"  rows="5" required></textarea>
+                                        <div id="DivDescricao" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group ">
+        <button id="btnSave" cursor="pointer" class="btn btn-primary sp" type="button">Criar</button>
+        <div id="load" class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('#load').hide();
+        $('#btnSave').on('click', function () {
+            $('#btnSave').prop('disabled', true);
+            $('#load').show();
+            var form = $('#formCadastroAtivo');
+            $.ajax({
+                method: 'Post',
+                url: '/ativo/create',
+                data: form.serialize()
+            }).then(function (response) {
+                $('#btnSave').prop('disabled', false)
+                $('#load').hide();
+
+                if (response.success) {    
+                    swal({
+                        title: "Salvo com sucesso!",
+                        text: "Clique no botão para sair!",
+                        icon: "success",
+                        button: "Sair!",
+                    }).then(function () {
+                        window.location = "List";
+                    });
+                }
+                else {
+                    response.erros.forEach(function (name) {
+                        $(`#${name.key}`).addClass((name.valid ? 'is-valid' : 'is-invalid'));
+
+                        if (name.msg) {
+                            ($("#Div" + name.key).text(name.msg.errorMessage))
+                        }
+                    });
+                }
+            })
+        });
+
+    </script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿<nav class="navbar navbar-light" style="background-color: #03A9F4;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+
+        </a>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active btn btn-primary me-md-2 bi bi-house" asp-area="" asp-controller="Ativo" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link active dropdown-toggle btn btn-primary me-md-2 bi bi-pencil-square" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categoria
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="nav-link active btn btn-primary me-md-2 bi bi-archive" asp-area="" asp-controller="Categoria" asp-action="Create">Nova Categoria</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="nav-link active btn btn-primary me-md-2 bi bi-card-checklist" asp-area="" asp-controller="Categoria" asp-action="List">Lista</a></li>                   
+                </ul>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link active dropdown-toggle btn btn-primary me-md-2 bi bi-card-checklist" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ativo
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="nav-link active btn btn-primary me-md-2 bi bi-archive" asp-area="" asp-controller="Ativo" asp-action="Create">Novo Ativo</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="nav-link active btn btn-primary me-md-2 bi bi-card-checklist" asp-area="" asp-controller="Ativo" asp-action="List">Lista</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
